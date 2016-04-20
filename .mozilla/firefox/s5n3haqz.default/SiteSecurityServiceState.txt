@@ -1,0 +1,7 @@
+mail.google.com:HSTS	0	16911	1472021889332,1,1
+hangouts.google.com:HSTS	0	16911	1472021893260,1,1
+services.addons.mozilla.org:HSTS	0	16911	1492671907856,1,0
+apis.google.com:HSTS	0	16911	1472021903650,1,0
+start.fedoraproject.org:HSTS	0	16911	1476903695715,1,1
+blocklist.addons.mozilla.org:HSTS	0	16911	1492672022837,1,0
+accounts.google.com:HSTS	0	16911	1472029496480,1,1

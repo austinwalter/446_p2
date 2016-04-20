@@ -1,0 +1,671 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+        "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" type="text/css" href="../../../style.css" title="style" />
+    <link rel="stylesheet" type="text/css" href="../style.css" title="style" />
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+
+    <title>getaddrinfo(3) - Linux manual page</title>
+</head>
+
+<body>
+
+<div class="page-top"><a id="top_of_page"></a></div>
+<!--%%%TOP_BAR%%%-->
+    <div class="nav-bar">
+        <table class="nav-table">
+            <tr>
+                <td class="nav-cell">
+                    <p class="nav-text">
+                        <a href="../../../index.html">man7.org</a> &gt; Linux &gt; <a href="../index.html">man-pages</a>
+                    </p>
+                </td>
+                <td class="training-cell">
+                    <p class="training-text"><a class="training-link" href="http://man7.org/training/">Linux/UNIX system programming training</a></p>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+<hr class="nav-end" />
+
+<!--%%%PAGE_START%%%-->
+
+
+<table class="sec-table">
+<tr>
+    <td>
+        <p class="section-dir">
+<a href="#NAME">NAME</a> | <a href="#SYNOPSIS">SYNOPSIS</a> | <a href="#DESCRIPTION">DESCRIPTION</a> | <a href="#RETURN&nbsp;VALUE">RETURN&nbsp;VALUE</a> | <a href="#FILES">FILES</a> | <a href="#ATTRIBUTES">ATTRIBUTES</a> | <a href="#CONFORMING&nbsp;TO">CONFORMING&nbsp;TO</a> | <a href="#NOTES">NOTES</a> | <a href="#EXAMPLE">EXAMPLE</a> | <a href="#SEE&nbsp;ALSO">SEE&nbsp;ALSO</a> | <a href="#COLOPHON">COLOPHON</a>
+        </p>
+    </td>
+    <td class="search-box">
+        <div class="man-search-box">
+
+            <form method="get" action="http://www.google.com/search">
+                <fieldset class="man-search">
+                    <input type="text" name="q" size="10" maxlength="255" value="" />
+                    <input type="hidden" name="sitesearch" value="man7.org/linux/man-pages" />
+                    <input type="submit" name="sa" value="Search online pages" />
+                </fieldset>
+            </form>
+
+        </div>
+    </td>
+    <td> </td>
+</tr>
+</table>
+
+<pre>
+<span class="headline">GETADDRINFO(3)            Linux Programmer's Manual           GETADDRINFO(3)</span>
+</pre>
+<h2><a id="NAME" href="#NAME"></a>NAME  &nbsp; &nbsp; &nbsp; &nbsp; <a href="#top_of_page"><span class="top-link">top</span></a></h2><pre>
+       getaddrinfo, freeaddrinfo, gai_strerror - network address and service
+       translation
+</pre>
+<h2><a id="SYNOPSIS" href="#SYNOPSIS"></a>SYNOPSIS  &nbsp; &nbsp; &nbsp; &nbsp; <a href="#top_of_page"><span class="top-link">top</span></a></h2><pre>
+       <b>#include &lt;sys/types.h&gt;</b>
+       <b>#include &lt;sys/socket.h&gt;</b>
+       <b>#include &lt;netdb.h&gt;</b>
+
+       <b>int getaddrinfo(const char *</b><i>node</i><b>, const char *</b><i>service</i><b>,</b>
+                       <b>const struct addrinfo *</b><i>hints</i><b>,</b>
+                       <b>struct addrinfo **</b><i>res</i><b>);</b>
+
+       <b>void freeaddrinfo(struct addrinfo *</b><i>res</i><b>);</b>
+
+       <b>const char *gai_strerror(int </b><i>errcode</i><b>);</b>
+
+   Feature Test Macro Requirements for glibc (see <a href="../man7/feature_test_macros.7.html">feature_test_macros(7)</a>):
+
+       <b>getaddrinfo</b>(), <b>freeaddrinfo</b>(), <b>gai_strerror</b>():
+           Since glibc 2.22: _POSIX_C_SOURCE &gt;= 201112L
+           Glibc 2.21 and earlier: _POSIX_C_SOURCE
+</pre>
+<h2><a id="DESCRIPTION" href="#DESCRIPTION"></a>DESCRIPTION  &nbsp; &nbsp; &nbsp; &nbsp; <a href="#top_of_page"><span class="top-link">top</span></a></h2><pre>
+       Given <i>node</i> and <i>service</i>, which identify an Internet host and a
+       service, <b>getaddrinfo</b>() returns one or more <i>addrinfo</i> structures, each
+       of which contains an Internet address that can be specified in a call
+       to <a href="../man2/bind.2.html">bind(2)</a> or <a href="../man2/connect.2.html">connect(2)</a>.  The <b>getaddrinfo</b>() function combines the
+       functionality provided by the <a href="../man3/gethostbyname.3.html">gethostbyname(3)</a> and <a href="../man3/getservbyname.3.html">getservbyname(3)</a>
+       functions into a single interface, but unlike the latter functions,
+       <b>getaddrinfo</b>() is reentrant and allows programs to eliminate
+       IPv4-versus-IPv6 dependencies.
+
+       The <i>addrinfo</i> structure used by <b>getaddrinfo</b>() contains the following
+       fields:
+
+           struct addrinfo {
+               int              ai_flags;
+               int              ai_family;
+               int              ai_socktype;
+               int              ai_protocol;
+               socklen_t        ai_addrlen;
+               struct sockaddr *ai_addr;
+               char            *ai_canonname;
+               struct addrinfo *ai_next;
+           };
+
+       The <i>hints</i> argument points to an <i>addrinfo</i> structure that specifies
+       criteria for selecting the socket address structures returned in the
+       list pointed to by <i>res</i>.  If <i>hints</i> is not NULL it points to an
+       <i>addrinfo</i> structure whose <i>ai_family</i>, <i>ai_socktype</i>, and <i>ai_protocol</i>
+       specify criteria that limit the set of socket addresses returned by
+       <b>getaddrinfo</b>(), as follows:
+
+       <i>ai_family</i>   This field specifies the desired address family for the
+                   returned addresses.  Valid values for this field include
+                   <b>AF_INET </b>and <b>AF_INET6</b>.  The value <b>AF_UNSPEC </b>indicates that
+                   <b>getaddrinfo</b>() should return socket addresses for any
+                   address family (either IPv4 or IPv6, for example) that
+                   can be used with <i>node</i> and <i>service</i>.
+
+       <i>ai_socktype</i> This field specifies the preferred socket type, for
+                   example <b>SOCK_STREAM </b>or <b>SOCK_DGRAM</b>.  Specifying 0 in this
+                   field indicates that socket addresses of any type can be
+                   returned by <b>getaddrinfo</b>().
+
+       <i>ai_protocol</i> This field specifies the protocol for the returned socket
+                   addresses.  Specifying 0 in this field indicates that
+                   socket addresses with any protocol can be returned by
+                   <b>getaddrinfo</b>().
+
+       <i>ai_flags</i>    This field specifies additional options, described below.
+                   Multiple flags are specified by bitwise OR-ing them
+                   together.
+
+       All the other fields in the structure pointed to by <i>hints</i> must
+       contain either 0 or a null pointer, as appropriate.
+
+       Specifying <i>hints</i> as NULL is equivalent to setting <i>ai_socktype</i> and
+       <i>ai_protocol</i> to 0; <i>ai_family</i> to <b>AF_UNSPEC</b>; and <i>ai_flags</i> to
+       <b>(AI_V4MAPPED | AI_ADDRCONFIG)</b>.  (POSIX specifies different defaults
+       for <i>ai_flags</i>; see NOTES.)  <i>node</i> specifies either a numerical network
+       address (for IPv4, numbers-and-dots notation as supported by
+       <a href="../man3/inet_aton.3.html">inet_aton(3)</a>; for IPv6, hexadecimal string format as supported by
+       <a href="../man3/inet_pton.3.html">inet_pton(3)</a>), or a network hostname, whose network addresses are
+       looked up and resolved.  If <i>hints.ai_flags</i> contains the
+       <b>AI_NUMERICHOST </b>flag, then <i>node</i> must be a numerical network address.
+       The <b>AI_NUMERICHOST </b>flag suppresses any potentially lengthy network
+       host address lookups.
+
+       If the <b>AI_PASSIVE </b>flag is specified in <i>hints.ai_flags</i>, and <i>node</i> is
+       NULL, then the returned socket addresses will be suitable for
+       <a href="../man2/bind.2.html">bind(2)</a>ing a socket that will <a href="../man2/accept.2.html">accept(2)</a> connections.  The returned
+       socket address will contain the "wildcard address" (<b>INADDR_ANY </b>for
+       IPv4 addresses, <b>IN6ADDR_ANY_INIT </b>for IPv6 address).  The wildcard
+       address is used by applications (typically servers) that intend to
+       accept connections on any of the host's network addresses.  If <i>node</i>
+       is not NULL, then the <b>AI_PASSIVE </b>flag is ignored.
+
+       If the <b>AI_PASSIVE </b>flag is not set in <i>hints.ai_flags</i>, then the
+       returned socket addresses will be suitable for use with <a href="../man2/connect.2.html">connect(2)</a>,
+       <a href="../man2/sendto.2.html">sendto(2)</a>, or <a href="../man2/sendmsg.2.html">sendmsg(2)</a>.  If <i>node</i> is NULL, then the network address
+       will be set to the loopback interface address (<b>INADDR_LOOPBACK </b>for
+       IPv4 addresses, <b>IN6ADDR_LOOPBACK_INIT </b>for IPv6 address); this is used
+       by applications that intend to communicate with peers running on the
+       same host.
+
+       <i>service</i> sets the port in each returned address structure.  If this
+       argument is a service name (see <a href="../man5/services.5.html">services(5)</a>), it is translated to the
+       corresponding port number.  This argument can also be specified as a
+       decimal number, which is simply converted to binary.  If <i>service</i> is
+       NULL, then the port number of the returned socket addresses will be
+       left uninitialized.  If <b>AI_NUMERICSERV </b>is specified in <i>hints.ai_flags</i>
+       and <i>service</i> is not NULL, then <i>service</i> must point to a string
+       containing a numeric port number.  This flag is used to inhibit the
+       invocation of a name resolution service in cases where it is known
+       not to be required.
+
+       Either <i>node</i> or <i>service</i>, but not both, may be NULL.
+
+       The <b>getaddrinfo</b>() function allocates and initializes a linked list of
+       <i>addrinfo</i> structures, one for each network address that matches <i>node</i>
+       and <i>service</i>, subject to any restrictions imposed by <i>hints</i>, and
+       returns a pointer to the start of the list in <i>res</i>.  The items in the
+       linked list are linked by the <i>ai_next</i> field.
+
+       There are several reasons why the linked list may have more than one
+       <i>addrinfo</i> structure, including: the network host is multihomed,
+       accessible over multiple protocols (e.g., both <b>AF_INET </b>and <b>AF_INET6</b>);
+       or the same service is available from multiple socket types (one
+       <b>SOCK_STREAM </b>address and another <b>SOCK_DGRAM </b>address, for example).
+       Normally, the application should try using the addresses in the order
+       in which they are returned.  The sorting function used within
+       <b>getaddrinfo</b>() is defined in RFC 3484; the order can be tweaked for a
+       particular system by editing <i>/etc/gai.conf</i> (available since glibc
+       2.5).
+
+       If <i>hints.ai_flags</i> includes the <b>AI_CANONNAME </b>flag, then the
+       <i>ai_canonname</i> field of the first of the <i>addrinfo</i> structures in the
+       returned list is set to point to the official name of the host.
+
+       The remaining fields of each returned <i>addrinfo</i> structure are
+       initialized as follows:
+
+       * The <i>ai_family</i>, <i>ai_socktype</i>, and <i>ai_protocol</i> fields return the
+         socket creation parameters (i.e., these fields have the same
+         meaning as the corresponding arguments of <a href="../man2/socket.2.html">socket(2)</a>).  For example,
+         <i>ai_family</i> might return <b>AF_INET </b>or <b>AF_INET6</b>; <i>ai_socktype</i> might
+         return <b>SOCK_DGRAM </b>or <b>SOCK_STREAM</b>; and <i>ai_protocol</i> returns the
+         protocol for the socket.
+
+       * A pointer to the socket address is placed in the <i>ai_addr</i> field, and
+         the length of the socket address, in bytes, is placed in the
+         <i>ai_addrlen</i> field.
+
+       If <i>hints.ai_flags</i> includes the <b>AI_ADDRCONFIG </b>flag, then IPv4
+       addresses are returned in the list pointed to by <i>res</i> only if the
+       local system has at least one IPv4 address configured, and IPv6
+       addresses are returned only if the local system has at least one IPv6
+       address configured.  The loopback address is not considered for this
+       case as valid as a configured address.  This flag is useful on, for
+       example, IPv4-only systems, to ensure that <b>getaddrinfo</b>() does not
+       return IPv6 socket addresses that would always fail in <a href="../man2/connect.2.html">connect(2)</a> or
+       <a href="../man2/bind.2.html">bind(2)</a>.
+
+       If <i>hints.ai_flags</i> specifies the <b>AI_V4MAPPED </b>flag, and <i>hints.ai_family</i>
+       was specified as <b>AF_INET6</b>, and no matching IPv6 addresses could be
+       found, then return IPv4-mapped IPv6 addresses in the list pointed to
+       by <i>res</i>.  If both <b>AI_V4MAPPED </b>and <b>AI_ALL </b>are specified in
+       <i>hints.ai_flags</i>, then return both IPv6 and IPv4-mapped IPv6 addresses
+       in the list pointed to by <i>res</i>.  <b>AI_ALL </b>is ignored if <b>AI_V4MAPPED </b>is
+       not also specified.
+
+       The <b>freeaddrinfo</b>() function frees the memory that was allocated for
+       the dynamically allocated linked list <i>res</i>.
+
+   <b>Extensions to getaddrinfo() for Internationalized Domain Names</b>
+       Starting with glibc 2.3.4, <b>getaddrinfo</b>() has been extended to
+       selectively allow the incoming and outgoing hostnames to be
+       transparently converted to and from the Internationalized Domain Name
+       (IDN) format (see RFC 3490, <i>Internationalizing Domain Names in</i>
+       <i>Applications (IDNA)</i>).  Four new flags are defined:
+
+       <b>AI_IDN </b>If this flag is specified, then the node name given in <i>node</i> is
+              converted to IDN format if necessary.  The source encoding is
+              that of the current locale.
+
+              If the input name contains non-ASCII characters, then the IDN
+              encoding is used.  Those parts of the node name (delimited by
+              dots) that contain non-ASCII characters are encoded using
+              ASCII Compatible Encoding (ACE) before being passed to the
+              name resolution functions.
+
+       <b>AI_CANONIDN</b>
+              After a successful name lookup, and if the <b>AI_CANONNAME </b>flag
+              was specified, <b>getaddrinfo</b>() will return the canonical name of
+              the node corresponding to the <i>addrinfo</i> structure value passed
+              back.  The return value is an exact copy of the value returned
+              by the name resolution function.
+
+              If the name is encoded using ACE, then it will contain the
+              <i>xn--</i> prefix for one or more components of the name.  To
+              convert these components into a readable form the <b>AI_CANONIDN</b>
+              flag can be passed in addition to <b>AI_CANONNAME</b>.  The resulting
+              string is encoded using the current locale's encoding.
+
+       <b>AI_IDN_ALLOW_UNASSIGNED</b>, <b>AI_IDN_USE_STD3_ASCII_RULES</b>
+              Setting these flags will enable the IDNA_ALLOW_UNASSIGNED
+              (allow unassigned Unicode code points) and
+              IDNA_USE_STD3_ASCII_RULES (check output to make sure it is a
+              STD3 conforming hostname) flags respectively to be used in the
+              IDNA handling.
+</pre>
+<h2><a id="RETURN_VALUE" href="#RETURN_VALUE"></a>RETURN VALUE  &nbsp; &nbsp; &nbsp; &nbsp; <a href="#top_of_page"><span class="top-link">top</span></a></h2><pre>
+       <b>getaddrinfo</b>() returns 0 if it succeeds, or one of the following
+       nonzero error codes:
+
+       <b>EAI_ADDRFAMILY</b>
+              The specified network host does not have any network addresses
+              in the requested address family.
+
+       <b>EAI_AGAIN</b>
+              The name server returned a temporary failure indication.  Try
+              again later.
+
+       <b>EAI_BADFLAGS</b>
+              <i>hints.ai_flags</i> contains invalid flags; or, <i>hints.ai_flags</i>
+              included <b>AI_CANONNAME </b>and <i>name</i> was NULL.
+
+       <b>EAI_FAIL</b>
+              The name server returned a permanent failure indication.
+
+       <b>EAI_FAMILY</b>
+              The requested address family is not supported.
+
+       <b>EAI_MEMORY</b>
+              Out of memory.
+
+       <b>EAI_NODATA</b>
+              The specified network host exists, but does not have any
+              network addresses defined.
+
+       <b>EAI_NONAME</b>
+              The <i>node</i> or <i>service</i> is not known; or both <i>node</i> and <i>service</i> are
+              NULL; or <b>AI_NUMERICSERV </b>was specified in <i>hints.ai_flags</i> and
+              <i>service</i> was not a numeric port-number string.
+
+       <b>EAI_SERVICE</b>
+              The requested service is not available for the requested
+              socket type.  It may be available through another socket type.
+              For example, this error could occur if <i>service</i> was "shell" (a
+              service available only on stream sockets), and either
+              <i>hints.ai_protocol</i> was <b>IPPROTO_UDP</b>, or <i>hints.ai_socktype</i> was
+              <b>SOCK_DGRAM</b>; or the error could occur if <i>service</i> was not NULL,
+              and <i>hints.ai_socktype</i> was <b>SOCK_RAW </b>(a socket type that does
+              not support the concept of services).
+
+       <b>EAI_SOCKTYPE</b>
+              The requested socket type is not supported.  This could occur,
+              for example, if <i>hints.ai_socktype</i> and <i>hints.ai_protocol</i> are
+              inconsistent (e.g., <b>SOCK_DGRAM </b>and <b>IPPROTO_TCP</b>, respectively).
+
+       <b>EAI_SYSTEM</b>
+              Other system error, check <i><a href="../man3/errno.3.html">errno</a></i> for details.
+
+       The <b>gai_strerror</b>() function translates these error codes to a human
+       readable string, suitable for error reporting.
+</pre>
+<h2><a id="FILES" href="#FILES"></a>FILES  &nbsp; &nbsp; &nbsp; &nbsp; <a href="#top_of_page"><span class="top-link">top</span></a></h2><pre>
+       <i>/etc/gai.conf</i>
+</pre>
+<h2><a id="ATTRIBUTES" href="#ATTRIBUTES"></a>ATTRIBUTES  &nbsp; &nbsp; &nbsp; &nbsp; <a href="#top_of_page"><span class="top-link">top</span></a></h2><pre>
+       For an explanation of the terms used in this section, see
+       <a href="../man7/attributes.7.html">attributes(7)</a>.
+
+       ┌────────────────┬───────────────┬────────────────────┐
+       │<b>Interface       </b>│ <b>Attribute     </b>│ <b>Value              </b>│
+       ├────────────────┼───────────────┼────────────────────┤
+       │<b>getaddrinfo</b>()   │ Thread safety │ MT-Safe env locale │
+       ├────────────────┼───────────────┼────────────────────┤
+       │<b>freeaddrinfo</b>(), │ Thread safety │ MT-Safe            │
+       │<b>gai_strerror</b>()  │               │                    │
+       └────────────────┴───────────────┴────────────────────┘
+</pre>
+<h2><a id="CONFORMING_TO" href="#CONFORMING_TO"></a>CONFORMING TO  &nbsp; &nbsp; &nbsp; &nbsp; <a href="#top_of_page"><span class="top-link">top</span></a></h2><pre>
+       POSIX.1-2001, POSIX.1-2008.  The <b>getaddrinfo</b>() function is documented
+       in RFC 2553.
+</pre>
+<h2><a id="NOTES" href="#NOTES"></a>NOTES  &nbsp; &nbsp; &nbsp; &nbsp; <a href="#top_of_page"><span class="top-link">top</span></a></h2><pre>
+       <b>getaddrinfo</b>() supports the <i>address</i><b>%</b><i>scope-id</i> notation for specifying
+       the IPv6 scope-ID.
+
+       <b>AI_ADDRCONFIG</b>, <b>AI_ALL</b>, and <b>AI_V4MAPPED </b>are available since glibc
+       2.3.3.  <b>AI_NUMERICSERV </b>is available since glibc 2.3.4.
+
+       According to POSIX.1, specifying <i>hints</i> as NULL should cause <i>ai_flags</i>
+       to be assumed as 0.  The GNU C library instead assumes a value of
+       <b>(AI_V4MAPPED | AI_ADDRCONFIG) </b>for this case, since this value is
+       considered an improvement on the specification.
+</pre>
+<h2><a id="EXAMPLE" href="#EXAMPLE"></a>EXAMPLE  &nbsp; &nbsp; &nbsp; &nbsp; <a href="#top_of_page"><span class="top-link">top</span></a></h2><pre>
+       The following programs demonstrate the use of <b>getaddrinfo</b>(),
+       <b>gai_strerror</b>(), <b>freeaddrinfo</b>(), and <a href="../man3/getnameinfo.3.html">getnameinfo(3)</a>.  The programs are
+       an echo server and client for UDP datagrams.
+
+   <b>Server program</b>
+
+       #include &lt;sys/types.h&gt;
+       #include &lt;stdio.h&gt;
+       #include &lt;stdlib.h&gt;
+       #include &lt;unistd.h&gt;
+       #include &lt;string.h&gt;
+       #include &lt;sys/socket.h&gt;
+       #include &lt;netdb.h&gt;
+
+       #define BUF_SIZE 500
+
+       int
+       main(int argc, char *argv[])
+       {
+           struct addrinfo hints;
+           struct addrinfo *result, *rp;
+           int sfd, s;
+           struct sockaddr_storage peer_addr;
+           socklen_t peer_addr_len;
+           ssize_t nread;
+           char buf[BUF_SIZE];
+
+           if (argc != 2) {
+               fprintf(stderr, "Usage: %s port\n", argv[0]);
+               exit(EXIT_FAILURE);
+           }
+
+           memset(&amp;hints, 0, sizeof(struct addrinfo));
+           hints.ai_family = AF_UNSPEC;    /* Allow IPv4 or IPv6 */
+           hints.ai_socktype = SOCK_DGRAM; /* Datagram socket */
+           hints.ai_flags = AI_PASSIVE;    /* For wildcard IP address */
+           hints.ai_protocol = 0;          /* Any protocol */
+           hints.ai_canonname = NULL;
+           hints.ai_addr = NULL;
+           hints.ai_next = NULL;
+
+           s = getaddrinfo(NULL, argv[1], &amp;hints, &amp;result);
+           if (s != 0) {
+               fprintf(stderr, "getaddrinfo: %s\n", gai_strerror(s));
+               exit(EXIT_FAILURE);
+           }
+
+           /* getaddrinfo() returns a list of address structures.
+              Try each address until we successfully bind(2).
+              If socket(2) (or bind(2)) fails, we (close the socket
+              and) try the next address. */
+
+           for (rp = result; rp != NULL; rp = rp-&gt;ai_next) {
+               sfd = socket(rp-&gt;ai_family, rp-&gt;ai_socktype,
+                       rp-&gt;ai_protocol);
+               if (sfd == -1)
+                   continue;
+
+               if (bind(sfd, rp-&gt;ai_addr, rp-&gt;ai_addrlen) == 0)
+                   break;                  /* Success */
+
+               close(sfd);
+           }
+
+           if (rp == NULL) {               /* No address succeeded */
+               fprintf(stderr, "Could not bind\n");
+               exit(EXIT_FAILURE);
+           }
+
+           freeaddrinfo(result);           /* No longer needed */
+
+           /* Read datagrams and echo them back to sender */
+
+           for (;;) {
+               peer_addr_len = sizeof(struct sockaddr_storage);
+               nread = recvfrom(sfd, buf, BUF_SIZE, 0,
+                       (struct sockaddr *) &amp;peer_addr, &amp;peer_addr_len);
+               if (nread == -1)
+                   continue;               /* Ignore failed request */
+
+               char host[NI_MAXHOST], service[NI_MAXSERV];
+
+               s = getnameinfo((struct sockaddr *) &amp;peer_addr,
+                               peer_addr_len, host, NI_MAXHOST,
+                               service, NI_MAXSERV, NI_NUMERICSERV);
+              if (s == 0)
+                   printf("Received %zd bytes from %s:%s\n",
+                           nread, host, service);
+               else
+                   fprintf(stderr, "getnameinfo: %s\n", gai_strerror(s));
+
+               if (sendto(sfd, buf, nread, 0,
+                           (struct sockaddr *) &amp;peer_addr,
+                           peer_addr_len) != nread)
+                   fprintf(stderr, "Error sending response\n");
+           }
+       }
+
+   <b>Client program</b>
+
+       #include &lt;sys/types.h&gt;
+       #include &lt;sys/socket.h&gt;
+       #include &lt;netdb.h&gt;
+       #include &lt;stdio.h&gt;
+       #include &lt;stdlib.h&gt;
+       #include &lt;unistd.h&gt;
+       #include &lt;string.h&gt;
+
+       #define BUF_SIZE 500
+
+       int
+       main(int argc, char *argv[])
+       {
+           struct addrinfo hints;
+           struct addrinfo *result, *rp;
+           int sfd, s, j;
+           size_t len;
+           ssize_t nread;
+           char buf[BUF_SIZE];
+
+           if (argc &lt; 3) {
+               fprintf(stderr, "Usage: %s host port msg...\n", argv[0]);
+               exit(EXIT_FAILURE);
+           }
+
+           /* Obtain address(es) matching host/port */
+
+           memset(&amp;hints, 0, sizeof(struct addrinfo));
+           hints.ai_family = AF_UNSPEC;    /* Allow IPv4 or IPv6 */
+           hints.ai_socktype = SOCK_DGRAM; /* Datagram socket */
+           hints.ai_flags = 0;
+           hints.ai_protocol = 0;          /* Any protocol */
+
+           s = getaddrinfo(argv[1], argv[2], &amp;hints, &amp;result);
+           if (s != 0) {
+               fprintf(stderr, "getaddrinfo: %s\n", gai_strerror(s));
+               exit(EXIT_FAILURE);
+           }
+
+           /* getaddrinfo() returns a list of address structures.
+              Try each address until we successfully connect(2).
+              If socket(2) (or connect(2)) fails, we (close the socket
+              and) try the next address. */
+
+           for (rp = result; rp != NULL; rp = rp-&gt;ai_next) {
+               sfd = socket(rp-&gt;ai_family, rp-&gt;ai_socktype,
+                            rp-&gt;ai_protocol);
+               if (sfd == -1)
+                   continue;
+
+               if (connect(sfd, rp-&gt;ai_addr, rp-&gt;ai_addrlen) != -1)
+                   break;                  /* Success */
+
+               close(sfd);
+           }
+
+           if (rp == NULL) {               /* No address succeeded */
+               fprintf(stderr, "Could not connect\n");
+               exit(EXIT_FAILURE);
+           }
+
+           freeaddrinfo(result);           /* No longer needed */
+
+           /* Send remaining command-line arguments as separate
+              datagrams, and read responses from server */
+
+           for (j = 3; j &lt; argc; j++) {
+               len = strlen(argv[j]) + 1;
+                       /* +1 for terminating null byte */
+
+               if (len + 1 &gt; BUF_SIZE) {
+                   fprintf(stderr,
+                           "Ignoring long message in argument %d\n", j);
+                   continue;
+               }
+
+               if (write(sfd, argv[j], len) != len) {
+                   fprintf(stderr, "partial/failed write\n");
+                   exit(EXIT_FAILURE);
+               }
+
+               nread = read(sfd, buf, BUF_SIZE);
+               if (nread == -1) {
+                   perror("read");
+                   exit(EXIT_FAILURE);
+               }
+
+               printf("Received %zd bytes: %s\n", nread, buf);
+           }
+
+           exit(EXIT_SUCCESS);
+       }
+</pre>
+<h2><a id="SEE_ALSO" href="#SEE_ALSO"></a>SEE ALSO  &nbsp; &nbsp; &nbsp; &nbsp; <a href="#top_of_page"><span class="top-link">top</span></a></h2><pre>
+       <a href="../man3/getaddrinfo_a.3.html">getaddrinfo_a(3)</a>, <a href="../man3/gethostbyname.3.html">gethostbyname(3)</a>, <a href="../man3/getnameinfo.3.html">getnameinfo(3)</a>, <a href="../man3/inet.3.html">inet(3)</a>,
+       <a href="../man5/gai.conf.5.html">gai.conf(5)</a>, <a href="../man7/hostname.7.html">hostname(7)</a>, <a href="../man7/ip.7.html">ip(7)</a>
+</pre>
+<h2><a id="COLOPHON" href="#COLOPHON"></a>COLOPHON  &nbsp; &nbsp; &nbsp; &nbsp; <a href="#top_of_page"><span class="top-link">top</span></a></h2><pre>
+       This page is part of release 4.05 of the Linux <i>man-pages</i> project.  A
+       description of the project, information about reporting bugs, and the
+       latest version of this page, can be found at
+       <a href="https://www.kernel.org/doc/man-pages/">https://www.kernel.org/doc/man-pages/</a>.
+
+<span class="footline">GNU                              2016-03-15                   GETADDRINFO(3)</span>
+</pre>
+
+<hr class="end-man-text" />
+
+<p class="page-copyright"><a href="../man3/getaddrinfo.3.license.html">Copyright and license for this manual page</a></p> 
+<hr class="start-footer" />
+
+<div class="footer"> 
+
+<table class="colophon-table">
+    <tr>
+    <td class="pub-info">
+        <p>
+            HTML rendering created 2016-04-19
+            by <a href="http://man7.org/mtk/index.html">Michael Kerrisk</a>, 
+            author of 
+            <a href="http://man7.org/tlpi/"><em>The Linux Programming Interface</em></a>, 
+            maintainer of the 
+            <a href="https://www.kernel.org/doc/man-pages/">Linux <em>man-pages</em> project</a>.
+        </p>
+        <p>
+            For details of in-depth
+            <strong>Linux/UNIX system programming training courses</strong>
+            that I teach, look <a href="http://man7.org/training/">here</a>.
+        </p>
+        <p>
+            Hosting by <a href="http://www.jambit.com/index_en.html">jambit GmbH</a>.
+        </p>
+        <p>
+            <a href="http://validator.w3.org/check?uri=referer">
+            <img src="http://www.w3.org/Icons/valid-xhtml11"
+                alt="Valid XHTML 1.1" height="31" width="88" />
+            </a>
+        </p>
+    </td>
+    <td class="colophon-divider">
+    </td>
+    <td class="tlpi-cover">
+        <a href="http://man7.org/tlpi/"><img src="http://man7.org/tlpi/cover/TLPI-front-cover-vsmall.png" alt="Cover of TLPI" /></a>
+    </td>
+    </tr>
+</table>
+
+</div>
+
+<hr class="end-footer" />
+
+
+
+<!--BEGIN-SITETRACKING-->
+<!-- SITETRACKING.man7.org_linux_man-pages -->
+
+<!-- Start of StatCounter Code (xhtml) -->
+
+<script type="text/javascript">
+//<![CDATA[
+var sc_project=7422636; 
+var sc_invisible=1; 
+var sc_security="9b6714ff"; 
+//]]>
+</script>
+<script type="text/javascript"
+src="http://www.statcounter.com/counter/counter_xhtml.js"></script>
+<noscript><div class="statcounter"><a title="website
+statistics" href="http://statcounter.com/"
+class="statcounter"><img class="statcounter"
+src="http://c.statcounter.com/7422636/0/9b6714ff/1/"
+alt="website statistics" /></a></div></noscript>
+
+<!-- End of StatCounter Code -->
+
+
+<!-- Start of Google Analytics Code -->
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-9830363-8']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+<!-- End of Google Analytics Code -->
+
+<!--END-SITETRACKING-->
+
+</body>
+</html>
+Px{��5      W*�W+<]�0W+   8:http://man7.org/linux/man-pages/man3/getaddrinfo.3.html necko:classified 1 request-method GET response-head HTTP/1.1 200 OK
+Date: Tue, 19 Apr 2016 23:06:51 GMT
+Server: Apache
+Last-Modified: Tue, 19 Apr 2016 11:50:12 GMT
+Etag: "1c80-7aaf-530d51466c500"
+Accept-Ranges: bytes
+Content-Length: 31407
+Content-Type: text/html; charset=UTF-8
+ charset UTF-8 uncompressed-len 0 predictor::resource-count 8 predictor::http://man7.org/style.css 1,1,1461136123,0 predictor::http://man7.org/linux/man-pages/style.css 1,1,1461136123,0 predictor::http://www.w3.org/Icons/valid-xhtml11 1,1,1461136123,0 predictor::http://man7.org/tlpi/cover/TLPI-front-cover-vsmall.png 1,1,1461136123,0 predictor::http://www.statcounter.com/counter/counter_xhtml.js 1,1,1461136123,0 predictor::http://www.google-analytics.com/ga.js 1,1,1461136123,0 predictor::http://c.statcounter.com/t.php?sc_project=7422636&java=1&security=9b6714ff&u1=za&sc_random=0.684212856052963&resolution=1280&h=1024&camefrom=https%3A//www.google.com&u=http%3A//man7.org/linux/man-pages/man3/getaddrinfo.3.html&t=getaddrinfo(3)%20-%20Linux%20manual%20page&sc_snum=1&p=0&invisible=1 1,1,1461136123,0 predictor::http://www.google-analytics.com/r/__utm.gif?utmwv=5.6.7&utms=1&utmn=2037384811&utmhn=man7.org&utmcs=UTF-8&utmsr=1280x1024&utmvp=947x601&utmsc=24-bit&utmul=en-us&utmje=0&utmfl=-&utmdt=getaddrinfo(3)%20-%20Linux%20manual%20page&utmhid=261456592&utmr=https%3A%2F%2Fwww.google.com&utmp=%2Flinux%2Fman-pages%2Fman3%2Fgetaddrinfo.3.html&utmht=1461136136043&utmac=UA-9830363-8&utmcc=__utma%3D141474094.1303446441.1461136136.1461136136.1461136136.1%3B%2B__utmz%3D141474094.1461136136.1.1.utmcsr%3Dgoogle%7Cutmccn%3D(organic)%7Cutmcmd%3Dorganic%7Cutmctr%3D(not%2520provided)%3B&utmjid=297045482&utmredir=1&utmu=qAAAAAAAAAAAAAAAAAAAAAQE~ 1,1,1461136123,0   z�
