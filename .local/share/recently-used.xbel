@@ -13,12 +13,32 @@
       </metadata>
     </info>
   </bookmark>
-  <bookmark href="file:///home/student/stream-talk-client.c" added="2016-04-20T06:58:15Z" modified="2016-04-20T06:58:15Z" visited="2016-04-20T06:58:15.493144Z">
+  <bookmark href="file:///home/student/stream-talk-client.c" added="2016-04-20T06:58:15Z" modified="2016-04-20T06:58:15Z" visited="2016-04-20T06:58:15Z">
     <info>
       <metadata owner="http://freedesktop.org">
         <mime:mime-type type="text/x-csrc"/>
         <bookmark:applications>
           <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-04-20T06:58:15Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/student/t-counter.c" added="2016-04-20T07:50:55Z" modified="2016-04-20T07:50:55Z" visited="2016-04-20T07:50:55Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="text/x-csrc"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-04-20T07:50:55Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/student/client.c" added="2016-04-20T07:58:19Z" modified="2016-04-20T07:58:19Z" visited="2016-04-20T07:58:19.404416Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="text/x-csrc"/>
+        <bookmark:applications>
+          <bookmark:application name="Firefox" exec="&apos;firefox %u&apos;" modified="2016-04-20T07:58:19Z" count="1"/>
         </bookmark:applications>
       </metadata>
     </info>

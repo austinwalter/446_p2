@@ -27,7 +27,7 @@ int main(int argc, char *argv[]){
 	int test = 5;
 	char item[MAX_LINE];
 	int item_size;
-
+	int *number;
 	
 	/* Build address data structure */
 	memset(&hints, 0, sizeof(struct addrinfo));
@@ -84,6 +84,7 @@ int main(int argc, char *argv[]){
 
         n = readchunk(new_s, buf, len);
         buf[n] = '\0';
+	printf("server recived: %s\n", buf);
         if((client_file = fopen(buf, "r")) == NULL)
         {
                 fprintf(stderr, "Can't open input file from client\n");
@@ -92,24 +93,28 @@ int main(int argc, char *argv[]){
                 close(s);
                 return 1;
         }
-
-        //length = sizeof(buf);
-	while(fscanf(client_file, "%s", buf) != EOF)
+	//length = sizeof(buf);
+	while(!feof(client_file))
 	{	
-	    length = sizeof(buf);
-            while(test != length)   //send message until it sends the whole message
+	    //length = sizeof(buf);   
+            fscanf(client_file, "%s", buf);
+	    //buf[n] = '\0';
+	    printf("buffer from file: %s\n", buf);
+	    
+            /*while(test != 100)   //send message until it sends the whole message
             {
                 if(test == -1)
                 {
                     printf("error in sending data\n");
                     return 1;
                 }
-		        test = send(new_s, buf, length, 0);
-            }
-            test = send(new_s, buf, length, 0);
-	    }
-	}
+		test = send(new_s, buf, 100, 0);
+            }*/
+            test = send(new_s, buf, 100, 0);
+	    printf("sent this many bytes: %d\n", test);
 
+	}
+	}
 	freeaddrinfo(result);
 	close(s);
 	close(new_s);

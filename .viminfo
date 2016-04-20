@@ -8,7 +8,10 @@
 # hlsearch on (H) or off (h):
 ~H
 # Command Line History (newest to oldest):
+:q
 :wq
+:130
+:w
 
 # Search String History (newest to oldest):
 
@@ -19,149 +22,238 @@
 # Input Line History (newest to oldest):
 
 # Registers:
+""-	CHAR	0
+	c
 
 # File marks:
-'0  43  34  ~/test/stream-talk-server.c
-'1  32  15  ~/stream-talk-client.c
-'2  97  8  ~/stream-talk-client.c
-'3  7  0  ~/myfile
-'4  27  13  ~/stream-talk-server.c
-'5  76  4  ~/stream-talk-client.c
-'6  27  13  ~/stream-talk-server.c
-'7  81  4  ~/stream-talk-client.c
-'8  85  4  ~/stream-talk-client.c
+'0  1  0  ~/myfile
+'1  100  12  ~/test/stream-talk-server.c
+'2  1  0  ~/test/myfile
+'3  117  1  ~/test/stream-talk-server.c
+'4  116  1  ~/test/stream-talk-server.c
+'5  112  14  ~/test/stream-talk-server.c
+'6  113  38  ~/test/stream-talk-server.c
+'7  99  6  ~/test/stream-talk-server.c
+'8  114  47  ~/test/stream-talk-server.c
+'9  111  6  ~/test/stream-talk-server.c
 
 # Jumplist (newest first):
--'  43  34  ~/test/stream-talk-server.c
--'  1  0  ~/test/stream-talk-server.c
--'  32  15  ~/stream-talk-client.c
--'  97  8  ~/stream-talk-client.c
--'  76  4  ~/stream-talk-client.c
--'  7  0  ~/myfile
 -'  1  0  ~/myfile
--'  27  13  ~/stream-talk-server.c
--'  1  0  ~/stream-talk-server.c
--'  1  0  ~/stream-talk-client.c
--'  27  13  ~/stream-talk-server.c
--'  1  0  ~/stream-talk-server.c
--'  5  22  ~/test/myfile
+-'  100  12  ~/test/stream-talk-server.c
 -'  1  0  ~/test/myfile
--'  13  24  ~/stream-talk-server.c
--'  27  1  ~/stream-talk-server.c
--'  7  0  ~/myfile
--'  1  0  ~/myfile
--'  1  0  ~/stream-talk-server.c
--'  81  4  ~/stream-talk-client.c
--'  7  0  ~/myfile
--'  1  0  ~/myfile
--'  13  24  ~/stream-talk-server.c
--'  27  1  ~/stream-talk-server.c
--'  7  0  ~/myfile
--'  1  0  ~/myfile
--'  1  0  ~/stream-talk-server.c
--'  7  0  ~/myfile
--'  1  0  ~/myfile
--'  96  8  ~/stream-talk-client.c
--'  75  4  ~/stream-talk-client.c
--'  7  0  ~/myfile
--'  1  0  ~/myfile
--'  27  13  ~/stream-talk-server.c
--'  1  0  ~/stream-talk-server.c
--'  27  13  ~/stream-talk-server.c
--'  1  0  ~/stream-talk-server.c
--'  5  22  ~/test/myfile
--'  1  0  ~/test/myfile
--'  13  24  ~/stream-talk-server.c
--'  27  1  ~/stream-talk-server.c
--'  7  0  ~/myfile
--'  1  0  ~/myfile
--'  1  0  ~/stream-talk-server.c
--'  80  4  ~/stream-talk-client.c
--'  7  0  ~/myfile
--'  1  0  ~/myfile
--'  13  24  ~/stream-talk-server.c
--'  27  1  ~/stream-talk-server.c
--'  7  0  ~/myfile
--'  1  0  ~/myfile
--'  1  0  ~/stream-talk-server.c
--'  7  0  ~/myfile
--'  1  0  ~/myfile
--'  38  4  ~/stream-talk-client.c
--'  32  1  ~/stream-talk-client.c
--'  101  8  ~/stream-talk-client.c
--'  80  4  ~/stream-talk-client.c
--'  7  0  ~/myfile
--'  1  0  ~/myfile
--'  27  13  ~/stream-talk-server.c
--'  1  0  ~/stream-talk-server.c
--'  1  0  ~/stream-talk-client.c
--'  27  13  ~/stream-talk-server.c
--'  1  0  ~/stream-talk-server.c
--'  5  22  ~/test/myfile
--'  1  0  ~/test/myfile
--'  13  24  ~/stream-talk-server.c
--'  27  1  ~/stream-talk-server.c
--'  7  0  ~/myfile
--'  1  0  ~/myfile
--'  1  0  ~/stream-talk-server.c
--'  85  4  ~/stream-talk-client.c
--'  7  0  ~/myfile
--'  1  0  ~/myfile
--'  13  24  ~/stream-talk-server.c
--'  27  1  ~/stream-talk-server.c
--'  7  0  ~/myfile
--'  1  0  ~/myfile
--'  1  0  ~/stream-talk-server.c
--'  7  0  ~/myfile
--'  1  0  ~/myfile
--'  100  8  ~/stream-talk-client.c
--'  79  4  ~/stream-talk-client.c
--'  7  0  ~/myfile
--'  1  0  ~/myfile
--'  27  13  ~/stream-talk-server.c
--'  1  0  ~/stream-talk-server.c
--'  27  13  ~/stream-talk-server.c
--'  1  0  ~/stream-talk-server.c
--'  5  22  ~/test/myfile
--'  1  0  ~/test/myfile
--'  13  24  ~/stream-talk-server.c
--'  27  1  ~/stream-talk-server.c
--'  7  0  ~/myfile
--'  1  0  ~/myfile
--'  1  0  ~/stream-talk-server.c
+-'  117  1  ~/test/stream-talk-server.c
+-'  116  1  ~/test/stream-talk-server.c
+-'  112  12  ~/test/stream-talk-server.c
+-'  113  12  ~/test/stream-talk-server.c
+-'  99  5  ~/test/stream-talk-server.c
+-'  114  5  ~/test/stream-talk-server.c
+-'  111  2  ~/test/stream-talk-server.c
+-'  102  5  ~/test/stream-talk-server.c
+-'  96  1  ~/test/stream-talk-server.c
+-'  101  5  ~/test/stream-talk-server.c
+-'  97  0  ~/test/stream-talk-server.c
+-'  5  0  ~/test/myfile
+-'  87  1  ~/test/stream-talk-server.c
+-'  110  0  ~/stream-talk-client.c
+-'  74  0  ~/stream-talk-client.c
+-'  52  4  ~/stream-talk-client.c
+-'  56  8  ~/stream-talk-client.c
+-'  66  8  ~/stream-talk-client.c
+-'  58  0  ~/test/stream-talk-server.c
+-'  67  1  ~/test/stream-talk-server.c
+-'  78  9  ~/stream-talk-client.c
+-'  1  0  ~/t-counter.c
+-'  104  12  ~/test/stream-talk-server.c
+-'  64  12  ~/stream-talk-client.c
 -'  84  4  ~/stream-talk-client.c
+-'  71  8  ~/stream-talk-client.c
+-'  94  4  ~/stream-talk-client.c
+-'  1  0  ~/str
+-'  43  1  ~/test/stream-talk-server.c
+-'  55  7  ~/stream-talk-client.c
+-'  13  4  ~/stream-talk-client.c
+-'  30  4  ~/stream-talk-client.c
+-'  31  4  ~/stream-talk-client.c
+-'  58  0  ~/stream-talk-client.c
+-'  1  0  ~/st
+-'  40  4  ~/stream-talk-client.c
+-'  1  0  ~/test/stream-talk-server.c
+-'  34  15  ~/stream-talk-client.c
+-'  99  8  ~/stream-talk-client.c
 -'  7  0  ~/myfile
+-'  27  13  ~/stream-talk-server.c
+-'  1  0  ~/stream-talk-server.c
+-'  1  0  ~/stream-talk-client.c
+-'  27  13  ~/stream-talk-server.c
+-'  1  0  ~/stream-talk-server.c
+-'  13  24  ~/stream-talk-server.c
+-'  27  1  ~/stream-talk-server.c
+-'  1  0  ~/stream-talk-server.c
+-'  83  4  ~/stream-talk-client.c
+-'  13  24  ~/stream-talk-server.c
+-'  27  1  ~/stream-talk-server.c
+-'  1  0  ~/stream-talk-server.c
+-'  98  8  ~/stream-talk-client.c
+-'  77  4  ~/stream-talk-client.c
+-'  27  13  ~/stream-talk-server.c
+-'  1  0  ~/stream-talk-server.c
+-'  27  13  ~/stream-talk-server.c
+-'  1  0  ~/stream-talk-server.c
+-'  13  24  ~/stream-talk-server.c
+-'  27  1  ~/stream-talk-server.c
+-'  1  0  ~/stream-talk-server.c
+-'  82  4  ~/stream-talk-client.c
+-'  13  24  ~/stream-talk-server.c
+-'  27  1  ~/stream-talk-server.c
+-'  1  0  ~/stream-talk-server.c
+-'  103  8  ~/stream-talk-client.c
+-'  27  13  ~/stream-talk-server.c
+-'  1  0  ~/stream-talk-server.c
+-'  27  13  ~/stream-talk-server.c
+-'  1  0  ~/stream-talk-server.c
+-'  13  24  ~/stream-talk-server.c
+-'  27  1  ~/stream-talk-server.c
+-'  1  0  ~/stream-talk-server.c
+-'  87  4  ~/stream-talk-client.c
+-'  13  24  ~/stream-talk-server.c
+-'  27  1  ~/stream-talk-server.c
+-'  1  0  ~/stream-talk-server.c
+-'  1  0  ~/t-counter.c
+-'  1  0  ~/str
+-'  1  0  ~/st
+-'  110  0  ~/stream-talk-client.c
+-'  74  0  ~/stream-talk-client.c
+-'  52  4  ~/stream-talk-client.c
+-'  56  8  ~/stream-talk-client.c
+-'  66  8  ~/stream-talk-client.c
+-'  78  9  ~/stream-talk-client.c
+-'  1  0  ~/t-counter.c
+-'  64  12  ~/stream-talk-client.c
+-'  84  4  ~/stream-talk-client.c
+-'  71  8  ~/stream-talk-client.c
+-'  94  4  ~/stream-talk-client.c
+-'  1  0  ~/str
+-'  110  0  ~/stream-talk-client.c
+-'  74  0  ~/stream-talk-client.c
 
 # History of marks within files (newest to oldest):
 
-> ~/test/stream-talk-server.c
-	"	43	34
-	^	43	35
-	.	43	34
-	+	43	34
+> ~/myfile
+	"	1	0
+	^	7	0
+	.	6	31
+	+	6	31
 
-> ~/stream-talk-client.c
-	"	38	4
-	^	38	5
-	.	38	4
-	+	33	15
-	+	39	0
-	+	30	14
-	+	32	14
-	+	33	24
-	+	32	15
-	+	52	37
-	+	33	24
-	+	37	38
-	+	30	14
-	+	35	20
-	+	38	4
+> ~/test/stream-talk-server.c
+	"	100	12
+	^	100	34
+	.	100	34
+	+	43	34
+	+	87	36
+	+	97	0
+	+	102	42
+	+	95	9
+	+	97	27
+	+	96	21
+	+	101	7
+	+	97	12
+	+	101	18
+	+	30	12
+	+	97	14
+	+	99	36
+	+	97	7
+	+	103	5
+	+	99	35
+	+	97	7
+	+	99	25
+	+	96	2
+	+	99	39
+	+	102	9
+	+	99	39
+	+	102	9
+	+	99	39
+	+	99	6
+	+	101	6
+	+	99	36
+	+	111	2
+	+	99	5
+	+	114	47
+	+	99	6
+	+	99	36
+	+	100	8
+	+	99	52
+	+	100	39
+	+	100	37
+	+	104	28
+	+	111	28
+	+	113	38
+	+	104	13
+	+	112	14
+	+	115	0
+	+	117	1
+	+	100	34
 
 > ~/test/myfile
-	"	5	22
-	^	5	23
-	.	5	22
+	"	1	0
+	^	1	6
+	.	1	5
 	+	5	22
+	+	1	5
+
+> ~/stream-talk-client.c
+	"	110	0
+	^	74	0
+	.	75	0
+	+	35	15
+	+	41	0
+	+	32	14
+	+	34	14
+	+	35	24
+	+	34	15
+	+	54	37
+	+	35	24
+	+	39	38
+	+	32	14
+	+	37	20
+	+	40	4
+	+	31	24
+	+	30	18
+	+	74	26
+	+	94	37
+	+	85	5
+	+	93	6
+	+	84	26
+	+	96	5
+	+	111	9
+	+	84	5
+	+	78	35
+	+	66	52
+	+	69	13
+	+	70	20
+	+	72	13
+	+	85	4
+	+	84	4
+	+	85	4
+	+	93	5
+	+	84	0
+	+	80	0
+	+	78	5
+	+	75	0
+
+> ~/client.c
+	"	83	0
+
+> ~/client
+	"	1	0
+
+> ~/t-counter.c
+	"	1	0
+
+> ~/str
+	"	1	0
+
+> ~/st
+	"	1	0
 
 > ~/stream-talk-server.c
 	"	13	24
@@ -173,9 +265,3 @@
 	+	99	25
 	+	27	13
 	+	13	24
-
-> ~/myfile
-	"	7	0
-	^	7	0
-	.	6	31
-	+	6	31

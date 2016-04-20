@@ -1,9 +1,16 @@
 <?xml version="1.0"?>
 <RDF:RDF xmlns:NC="http://home.netscape.com/NC-rdf#"
          xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+  <RDF:Description RDF:about="urn:mimetype:text/x-c"
+                   NC:value="text/x-c"
+                   NC:editable="true"
+                   NC:description="C source code">
+    <NC:handlerProp RDF:resource="urn:mimetype:handler:text/x-c"/>
+  </RDF:Description>
   <RDF:Seq RDF:about="urn:mimetypes:root">
     <RDF:li RDF:resource="urn:mimetype:application/pdf"/>
     <RDF:li RDF:resource="urn:mimetype:text/x-csrc"/>
+    <RDF:li RDF:resource="urn:mimetype:text/x-c"/>
   </RDF:Seq>
   <RDF:Description RDF:about="urn:handler:web:https://www.mibbit.com/?url=%s"
                    NC:prettyName="Mibbit"
@@ -59,6 +66,11 @@
   <RDF:Description RDF:about="urn:mimetype:application/pdf"
                    NC:value="application/pdf">
     <NC:handlerProp RDF:resource="urn:mimetype:handler:application/pdf"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="urn:mimetype:handler:text/x-c"
+                   NC:alwaysAsk="true"
+                   NC:saveToDisk="true">
+    <NC:externalApplication RDF:resource="urn:mimetype:externalApplication:text/x-c"/>
   </RDF:Description>
   <RDF:Description RDF:about="urn:scheme:handler:irc"
                    NC:alwaysAsk="true">

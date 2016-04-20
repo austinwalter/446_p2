@@ -1,0 +1,106 @@
+document.write('\x3cdiv style\x3d\x22display:table; width: 100%; height: 100%\x22\x3e\x3cdiv style\x3d\x22display:table-cell; vertical-align: middle\x22\x3e');
+        (function() {
+          var dcmAdResponseConfig = {
+            clickTags: [{name:'clickTag',url:'https://adclick.g.doubleclick.net/pcs/click?xai=AKAOjsswGXcD1lK6wh4Ren327Pvql8T-owr7uhUxuDsS8XnWrhqtnrJj2yf71PLZ1xxvUiXxtL4hxyRKoNBRI5wDkvmWLHgCJrrf4Z38AqjjrFtjmWeSYwjmmL9ZWhfk&sig=Cg0ArKJSzD0DVp4Zb3aLEAE&urlfix=1&adurl=https://adclick.g.doubleclick.net/aclk%3Fsa%3DL%26ai%3DCVDrnpcsWV4bgC9OEBY3cnRjNrtDJCI2sg9-OAcCNtwEQASAAYMnG1obIo5QbggEXY2EtcHViLTc4Njg2MDE3NTA4NTMyNjHIAQmoAwGqBJ8BT9Am3HwEqLR8iWNI8bG-xmj-4hNvgREAm-ci8Ms4B-1zK9qr3rEwihtA0aTAkVjjqxbXoS5AlBvu45PvO1wmZyF8vyOkevpVLNKNUEFCJAa3ml1KwN9-2Z9q7PjFPoOD-3mwa91njiRN_scUplPMsU3x0ga-nDGNeVf9MaHeIp2dUhotPH5gclwJo7DdW9j_J_3wnCCdIbjoHM7hlN4rgAax_aqu77ifi40BoAYhqAemvhvYBwA%26num%3D1%26sig%3DAOD64_3uCmTCsu0H5jxEYv08ojC0kz9T7w%26client%3Dca-pub-7868601750853261%26adurl%3Dhttp://disneycruise.disney.go.com/price-value/%253FCMP%253DBAC-CRT%257C9087896%257C1141162%257C123051358%257C65680808'}],
+            creativeIframeId: "creativeIframe677093982",
+            primaryAssetPath: "https://s0.2mdn.net/3155318/1443655888630/300x250_FY16_DCL Transact_FY16_What\x27s Included/DCL-15-40450_FY15_Q2WhatsIncluded_FLP_BNR_300x250.html",
+            creativeWidth: '300',
+            creativeHeight: '250',
+            backupImageUrl: "https://s0.2mdn.net/3155318/1-300x250_FY16_DCL_Transact_FY16_What_s_Included.jpg",
+            backupImageClickTagUrl: "https://adclick.g.doubleclick.net/pcs/click?xai=AKAOjsswGXcD1lK6wh4Ren327Pvql8T-owr7uhUxuDsS8XnWrhqtnrJj2yf71PLZ1xxvUiXxtL4hxyRKoNBRI5wDkvmWLHgCJrrf4Z38AqjjrFtjmWeSYwjmmL9ZWhfk&sig=Cg0ArKJSzD0DVp4Zb3aLEAE&urlfix=1&adurl=https://adclick.g.doubleclick.net/aclk%3Fsa%3DL%26ai%3DCVDrnpcsWV4bgC9OEBY3cnRjNrtDJCI2sg9-OAcCNtwEQASAAYMnG1obIo5QbggEXY2EtcHViLTc4Njg2MDE3NTA4NTMyNjHIAQmoAwGqBJ8BT9Am3HwEqLR8iWNI8bG-xmj-4hNvgREAm-ci8Ms4B-1zK9qr3rEwihtA0aTAkVjjqxbXoS5AlBvu45PvO1wmZyF8vyOkevpVLNKNUEFCJAa3ml1KwN9-2Z9q7PjFPoOD-3mwa91njiRN_scUplPMsU3x0ga-nDGNeVf9MaHeIp2dUhotPH5gclwJo7DdW9j_J_3wnCCdIbjoHM7hlN4rgAax_aqu77ifi40BoAYhqAemvhvYBwA%26num%3D1%26sig%3DAOD64_3uCmTCsu0H5jxEYv08ojC0kz9T7w%26client%3Dca-pub-7868601750853261%26adurl%3Dhttp://disneycruise.disney.go.com/price-value/%253FCMP%253DBAC-CRT%257C9087896%257C1141162%257C123051358%257C65680808",
+            backupTargetWindow: "_blank",
+            featureChecks: [],
+            centerStyle: "display:block; margin-left:auto; margin-right:auto",
+            modernizrSrc: "/ads/studio/cached_libs/modernizr_2.8.3_ec185bb44fe5e6bf7455d6e8ef37ed0e_no-classes.js",
+            servingDomain: "//s0.2mdn.net",
+            isInApp: "" == "1",
+            expandWidth: '300',
+            expandHeight: '250'
+          };
+          var $goog$now$$ = Date.now || function() {
+  return +new Date;
+};
+var $studio$codegen$DcmHtml5AdResponse$PROTOCOL_$$ = "https:" == window.location.protocol ? "https:" : "http:", $opt_object$$inline_9$$ = function($dcmAdResponseConfig$$) {
+  var $modernizrSrc$$ = $studio$codegen$DcmHtml5AdResponse$PROTOCOL_$$ + $dcmAdResponseConfig$$.servingDomain + $dcmAdResponseConfig$$.modernizrSrc, $isInApp_script$$3$$ = $dcmAdResponseConfig$$.isInApp, $creativeIframeId$$ = $dcmAdResponseConfig$$.creativeIframeId, $renderingMethod$$ = "renderCreative" + $goog$now$$(), $isMraid$$ = window.mraid && window.mraid.open, $divId$$ = "div_" + $studio$codegen$DcmHtml5AdResponse$escapeHtml_$$($creativeIframeId$$) + "_" + (new Date).getTime();
+  document.write('<div id="' + $divId$$ + '"></div>');
+  window.$dcmHtml5Rendering$ || (window.$dcmHtml5Rendering$ = {}, window.$dcmHtml5Rendering$[$renderingMethod$$] = {}, window.$dcmHtml5Rendering$[$renderingMethod$$].$config$ = $dcmAdResponseConfig$$, window.$dcmHtml5Rendering$.$modernizrLoaded$ = !1);
+  $studio$codegen$DcmHtml5AdResponse$listen_$$(window, "message", $studio$codegen$DcmHtml5AdResponse$handleClickTagMessage_$$);
+  $isInApp_script$$3$$ && ($isInApp_script$$3$$ = document.createElement("script"), $isInApp_script$$3$$.src = "mraid.js", $isInApp_script$$3$$.type = $isMraid$$ ? "text/x-do-not-download" : "text/javascript", document.getElementById($divId$$).appendChild($isInApp_script$$3$$));
+  window.$dcmHtml5Rendering$.$modernizrLoaded$ ? setTimeout(function() {
+    $studio$codegen$DcmHtml5AdResponse$renderAd_$$($dcmAdResponseConfig$$, $divId$$);
+  }, 0) : (window.$dcmHtml5Rendering$[$renderingMethod$$].$renderAd$ = $studio$codegen$DcmHtml5AdResponse$renderAd_$$, $isInApp_script$$3$$ = document.createElement("script"), $isInApp_script$$3$$.src = $modernizrSrc$$, $isInApp_script$$3$$.type = "text/javascript", $isInApp_script$$3$$.onload = function() {
+    window.$dcmHtml5Rendering$[$renderingMethod$$].$renderAd$(window.$dcmHtml5Rendering$[$renderingMethod$$].$config$, $divId$$);
+  }, $studio$codegen$DcmHtml5AdResponse$scriptOnload_$$($isInApp_script$$3$$, function() {
+    window.$dcmHtml5Rendering$[$renderingMethod$$].$renderAd$(window.$dcmHtml5Rendering$[$renderingMethod$$].$config$, $divId$$);
+  }), document.getElementById($divId$$).appendChild($isInApp_script$$3$$));
+}, $parts$$inline_11$$ = ["studio", "codegen", "DcmHtml5AdResponse", "bootstrap"], $cur$$inline_12$$ = this;
+$parts$$inline_11$$[0] in $cur$$inline_12$$ || !$cur$$inline_12$$.execScript || $cur$$inline_12$$.execScript("var " + $parts$$inline_11$$[0]);
+for (var $part$$inline_13$$;$parts$$inline_11$$.length && ($part$$inline_13$$ = $parts$$inline_11$$.shift());) {
+  $parts$$inline_11$$.length || void 0 === $opt_object$$inline_9$$ ? $cur$$inline_12$$ = $cur$$inline_12$$[$part$$inline_13$$] ? $cur$$inline_12$$[$part$$inline_13$$] : $cur$$inline_12$$[$part$$inline_13$$] = {} : $cur$$inline_12$$[$part$$inline_13$$] = $opt_object$$inline_9$$;
+}
+var $studio$codegen$DcmHtml5AdResponse$renderAd_$$ = function($dcmAdResponseConfig$$1$$, $divId$$1$$) {
+  var $clickTags$$ = $dcmAdResponseConfig$$1$$.clickTags, $creativeIframeId$$1$$ = $dcmAdResponseConfig$$1$$.creativeIframeId, $div_primaryAssetPath$$ = $dcmAdResponseConfig$$1$$.primaryAssetPath, $creativeWidth$$ = $dcmAdResponseConfig$$1$$.creativeWidth, $creativeHeight$$ = $dcmAdResponseConfig$$1$$.creativeHeight, $backupImageUrl_iframe$$ = $dcmAdResponseConfig$$1$$.backupImageUrl, $backupImageClickTagUrl$$ = $dcmAdResponseConfig$$1$$.backupImageClickTagUrl, $backupTargetWindow$$ = $dcmAdResponseConfig$$1$$.backupTargetWindow, 
+  $featureChecks$$1$$ = $dcmAdResponseConfig$$1$$.featureChecks, $centerStyle$$ = $dcmAdResponseConfig$$1$$.centerStyle, $isInApp$$1$$ = $dcmAdResponseConfig$$1$$.isInApp, $expandWidth$$ = $dcmAdResponseConfig$$1$$.expandWidth, $expandHeight$$ = $dcmAdResponseConfig$$1$$.expandHeight;
+  $featureChecks$$1$$.push("!!window.postMessage");
+  window.$dcmHtml5Rendering$.$modernizrLoaded$ = !0;
+  for (var $i$$12$$ = 0;$i$$12$$ < $featureChecks$$1$$.length;$i$$12$$++) {
+    if (!eval($featureChecks$$1$$[$i$$12$$])) {
+      document.write('<a href="' + $studio$codegen$DcmHtml5AdResponse$escapeHtml_$$($backupImageClickTagUrl$$) + '" target="' + $studio$codegen$DcmHtml5AdResponse$escapeHtml_$$($backupTargetWindow$$) + '"><img border="0" style="' + $studio$codegen$DcmHtml5AdResponse$escapeHtml_$$($centerStyle$$) + '" src="' + $studio$codegen$DcmHtml5AdResponse$escapeHtml_$$($backupImageUrl_iframe$$) + '"></a>');
+      return;
+    }
+  }
+  0 == $dcmAdResponseConfig$$1$$.creativeWidth && ($creativeWidth$$ = $expandWidth$$ || "0");
+  0 == $dcmAdResponseConfig$$1$$.creativeHeight && ($creativeHeight$$ = $expandHeight$$ || "0");
+  $backupImageUrl_iframe$$ = document.createElement("iframe");
+  $backupImageUrl_iframe$$.frameBorder = "0";
+  $backupImageUrl_iframe$$.scrolling = "no";
+  $backupImageUrl_iframe$$.id = $studio$codegen$DcmHtml5AdResponse$escapeHtml_$$($creativeIframeId$$1$$);
+  $backupImageUrl_iframe$$.src = $studio$codegen$DcmHtml5AdResponse$escapeHtml_$$($div_primaryAssetPath$$);
+  $backupImageUrl_iframe$$.width = $studio$codegen$DcmHtml5AdResponse$escapeHtml_$$($creativeWidth$$);
+  $backupImageUrl_iframe$$.height = $studio$codegen$DcmHtml5AdResponse$escapeHtml_$$($creativeHeight$$);
+  $backupImageUrl_iframe$$.style.display = "block";
+  $backupImageUrl_iframe$$.style.marginLeft = "auto";
+  $backupImageUrl_iframe$$.style.marginRight = "auto";
+  $studio$codegen$DcmHtml5AdResponse$listen_$$($backupImageUrl_iframe$$, "load", function() {
+    document.getElementById($creativeIframeId$$1$$).contentWindow.postMessage(JSON.stringify({clickTags:$clickTags$$, relegateNavigation:window.mraid && window.mraid.open && $isInApp$$1$$ ? "parent" : "inline", isInitClickTag:!0}), "*");
+  });
+  $div_primaryAssetPath$$ = document.getElementById($divId$$1$$);
+  $div_primaryAssetPath$$.$isRendered$ || ($div_primaryAssetPath$$.$isRendered$ = !0, $div_primaryAssetPath$$.appendChild($backupImageUrl_iframe$$));
+}, $studio$codegen$DcmHtml5AdResponse$escapeHtml_$$ = function($text$$10$$) {
+  var $div$$1$$ = document.createElement("div");
+  $div$$1$$.appendChild(document.createTextNode($text$$10$$));
+  return $div$$1$$.innerHTML;
+}, $studio$codegen$DcmHtml5AdResponse$handleClickTagMessage_$$ = function($e$$9$$) {
+  try {
+    var $eventData$$ = JSON.parse($e$$9$$.data);
+  } catch ($err$$) {
+    return;
+  }
+  $eventData$$.isPostClickTag && window.mraid && window.mraid.open && $eventData$$.clickTag && window.mraid.open($eventData$$.clickTag);
+}, $studio$codegen$DcmHtml5AdResponse$listen_$$ = function($target$$44$$, $type$$93$$, $handler$$3$$) {
+  window.addEventListener ? $target$$44$$.addEventListener($type$$93$$, $handler$$3$$, !1) : $target$$44$$.attachEvent("on" + $type$$93$$, $handler$$3$$);
+}, $studio$codegen$DcmHtml5AdResponse$scriptOnload_$$ = function($script$$4$$, $onload$$) {
+  "loaded" == $script$$4$$.readyState || "completed" == $script$$4$$.readyState ? $onload$$() : setTimeout(function() {
+    $studio$codegen$DcmHtml5AdResponse$scriptOnload_$$($script$$4$$, $onload$$);
+  }, 50);
+};
+
+
+          studio.codegen.DcmHtml5AdResponse.bootstrap(dcmAdResponseConfig);
+        })();
+      document.write('\n\x3cnoscript\x3e\x3ca href\x3d\x22https://adclick.g.doubleclick.net/pcs/click?xai\x3dAKAOjsswGXcD1lK6wh4Ren327Pvql8T-owr7uhUxuDsS8XnWrhqtnrJj2yf71PLZ1xxvUiXxtL4hxyRKoNBRI5wDkvmWLHgCJrrf4Z38AqjjrFtjmWeSYwjmmL9ZWhfk\x26sig\x3dCg0ArKJSzD0DVp4Zb3aLEAE\x26urlfix\x3d1\x26adurl\x3dhttps://adclick.g.doubleclick.net/aclk%3Fsa%3DL%26ai%3DCVDrnpcsWV4bgC9OEBY3cnRjNrtDJCI2sg9-OAcCNtwEQASAAYMnG1obIo5QbggEXY2EtcHViLTc4Njg2MDE3NTA4NTMyNjHIAQmoAwGqBJ8BT9Am3HwEqLR8iWNI8bG-xmj-4hNvgREAm-ci8Ms4B-1zK9qr3rEwihtA0aTAkVjjqxbXoS5AlBvu45PvO1wmZyF8vyOkevpVLNKNUEFCJAa3ml1KwN9-2Z9q7PjFPoOD-3mwa91njiRN_scUplPMsU3x0ga-nDGNeVf9MaHeIp2dUhotPH5gclwJo7DdW9j_J_3wnCCdIbjoHM7hlN4rgAax_aqu77ifi40BoAYhqAemvhvYBwA%26num%3D1%26sig%3DAOD64_3uCmTCsu0H5jxEYv08ojC0kz9T7w%26client%3Dca-pub-7868601750853261%26adurl%3Dhttp://disneycruise.disney.go.com/price-value/%253FCMP%253DBAC-CRT%257C9087896%257C1141162%257C123051358%257C65680808\x22 target\x3d\x22_blank\x22\x3e\x3cimg border\x3d\x220\x22 style\x3d\x22display:block; margin-left:auto; margin-right:auto\x22 alt\x3d\x22Backup Image\x22 src\x3d\x22https://s0.2mdn.net/3155318/1-300x250_FY16_DCL_Transact_FY16_What_s_Included.jpg\x22 /\x3e\x3c/a\x3e\x3c/noscript\x3e\x3c/div\x3e\x3c/div\x3e');document.write('\x3cscript type\x3d\x22text/javascript\x22 src\x3d\x22https://cdn.doubleverify.com/dvtp_src.js?ctx\x3d1000798\x26amp;cmp\x3d9087896\x26amp;sid\x3d1141162\x26amp;plc\x3d123051358\x26amp;num\x3d\x26amp;adid\x3d\x26amp;advid\x3d3155318\x26amp;adsrv\x3d1\x26amp;region\x3d30\x26amp;btreg\x3d296139719\x26amp;btadsrv\x3ddoubleclick\x26amp;crt\x3d65680808\x26amp;crtname\x3d\x26amp;chnl\x3d\x26amp;unit\x3d\x26amp;pid\x3d\x26amp;uid\x3d\x26amp;dvtagver\x3d6.1.src\x22\x3e\x3c/script\x3e');}Œ„w´      W<¨W<¨<]áp      L:https://bid.g.doubleclick.net/xbbe/creative/adj?p=APEucNXdDvOBnsD0YEj3MxsoNwjhH7oHRR6csN8rVG_L3oljzLIFPg0&d=APEucNWPAWjd_-xrJujFF1pIhgUHimo38H1Q7Tjiixpi406-dAdV3KVmqQXYb5qgc7gTtykFTrb74FlXPnaDuT7C8gtdLqHrV_huuTx8iXRDemt9G-vtOvK2DLeyYoWYuGmpHBsvKBscv1yfm4Ke3P3tfpCPY56tpONv6OjDISq3oModvq54GNzHvcMiu5SxheQYfIfgj78A650iID9s43Fd8QmjSuXhcMHqMndwgvrz0rdlvVkgrSAv0GUvUTO0Js35Rwxs8RC0BSlDFa2sxxeJP0crLUZq7l60cxV_sdyvRGvDZPsVTrpcYoOX0gzS8cArCjHQY1OG4Fy4VgjHnvQuYqKF9UdHCOHPGOOghoK7L3ldPztMlfvgrSPzd6p61c7o7eZ-15s5SP6cYrjzSrgWVdVbYUwUa6Os_pW4XQsGyUpGkCavzDWHceC-ko2DTtfEOI8fKMMmsxFRU_Wq44_qkxgFecAzfg&c=https://adclick.g.doubleclick.net/aclk%3Fsa%3DL%26ai%3DCVDrnpcsWV4bgC9OEBY3cnRjNrtDJCI2sg9-OAcCNtwEQASAAYMnG1obIo5QbggEXY2EtcHViLTc4Njg2MDE3NTA4NTMyNjHIAQmoAwGqBJ8BT9Am3HwEqLR8iWNI8bG-xmj-4hNvgREAm-ci8Ms4B-1zK9qr3rEwihtA0aTAkVjjqxbXoS5AlBvu45PvO1wmZyF8vyOkevpVLNKNUEFCJAa3ml1KwN9-2Z9q7PjFPoOD-3mwa91njiRN_scUplPMsU3x0ga-nDGNeVf9MaHeIp2dUhotPH5gclwJo7DdW9j_J_3wnCCdIbjoHM7hlN4rgAax_aqu77ifi40BoAYhqAemvhvYBwA%26num%3D1%26sig%3DAOD64_3uCmTCsu0H5jxEYv08ojC0kz9T7w%26client%3Dca-pub-7868601750853261%26adurl%3D necko:classified 1 security-info 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 request-method GET response-head HTTP/2.0 200 OK
+p3p: policyref="https://googleads.g.doubleclick.net/pagead/gcn_p3p_.xml", CP="CURa ADMa DEVa TAIo PSAo PSDo OUR IND UNI PUR INT DEM STA PRE COM NAV OTC NOI DSP COR"
+Date: Wed, 20 Apr 2016 00:22:10 GMT
+Pragma: no-cache
+Expires: Fri, 01 Jan 1990 00:00:00 GMT
+Cache-Control: no-cache, must-revalidate
+Content-Type: text/javascript; charset=UTF-8
+x-content-type-options: nosniff
+Content-Disposition: attachment; filename="f.txt"
+Server: xbfe
+Content-Length: 11820
+x-xss-protection: 1; mode=block
+alternate-protocol: 443:quic
+Alt-Svc: quic=":443"; ma=2592000; v="32,31,30,29,28,27,26,25"
+X-Firefox-Spdy: h2
+ uncompressed-len 0   .,

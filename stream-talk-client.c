@@ -26,7 +26,9 @@ int main(int argc, char *argv[])
     int length;
     int i = 0, j = 0;
     FILE *fileinput;
-
+	
+    fflush(stdout);    
+    printf("%d\n", argc);
     if (argc==4) 
     {
 	host = argv[1];
@@ -61,12 +63,13 @@ int main(int argc, char *argv[])
         {
             continue;
         }
-        if (connect(s, rp->ai_addr, rp->ai_addrlen) != -1) 
+        if (connect(s, rp->ai_addr, rp->ai_addrlen) == -1) 
         {
             printf("error connecting\n");
-            break;
+	    close(s);
+            continue;
         }
-        close(s);
+        break;
     }
  
     if (rp == NULL) {
@@ -88,9 +91,9 @@ int main(int argc, char *argv[])
             return 1;
         }
     }
-    
+    printf("test after first send\n");
     fileinput = fopen(filename, "w");
-    n = readchunk(s, buf, len);
+    //n = readchunk(s, buf, len);
     buf[n] = '\0';
     
     while(n > 0)
@@ -105,7 +108,7 @@ int main(int argc, char *argv[])
             close(s);
             return 1;
         }
-        n = readchunk(s, buf, len);
+        //n = readchunk(s, buf, len);
         buf[n] = '\0';
     }
     fclose(fileinput);

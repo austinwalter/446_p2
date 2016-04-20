@@ -1,10 +1,6 @@
 [xfdesktop-version-4.10.3+-rcfile_format]
 4.10.3+=true
 
-[/home/student/stream-talk-client.c]
-row=4
-col=0
-
 [/home/student/client]
 row=5
 col=0
@@ -21,9 +17,29 @@ col=0
 row=6
 col=0
 
+[/home/student/t-counter.c]
+row=1
+col=1
+
 [/home/student/test]
 row=0
 col=1
+
+[/home/student/stream-talk-client.c]
+row=4
+col=0
+
+[/home/student/client.c]
+row=2
+col=1
+
+[/home/student/testclient]
+row=3
+col=1
+
+[/home/student/446_p2]
+row=7
+col=0
 
 [FAE4FD46E4FD0623]
 row=0
