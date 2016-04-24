@@ -14,6 +14,9 @@
 #include <arpa/inet.h>
 #include <sys/wait.h>
 #include <signal.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <unistd.h>
 
 #define BACKLOG 10	 // how many pending connections queue will hold
 
@@ -48,7 +51,9 @@ int main(int argc, char *argv[])
 	int yes=1;
 	char s[INET6_ADDRSTRLEN];
 	int rv, numbytes;
-  char buf[100];
+  int size = 1024;
+  int bytes_read = 1;
+  char buf[100], buffer[size];
 
   if (argc != 2) {
     fprintf(stderr,"usage: please enter a port number\n");
@@ -125,14 +130,48 @@ int main(int argc, char *argv[])
 
 		if (!fork()) { // this is the child process
 			close(sockfd); // child doesn't need the listener
-      if ((numbytes = recv(new_fd, buf, 99, 0)) == -1) {
+      if ((numbytes = recv(new_fd, buf, 99, MSG_WAITALL)) == -1) {
         perror("recv");
         exit(1);
       }
       close(new_fd);
-      buf[numbytes+1] = '\0';
+      buf[numbytes] = '\0';
       printf("received: '%s'\n",buf);
-			exit(0);
+      int num = sizeof buf + 7;
+      char fpath[num];
+      strcpy(fpath, "./file/");
+      strcat(fpath, buf);
+      // Open the file
+      int file_desc = open(fpath, O_RDONLY);
+      
+      // Check to see if there were any error opening the file
+      if(file_desc < 0)
+      {
+        perror("Error opening file");
+        printf("%s",fpath);
+        exit(1);
+      }
+      
+      // loop until end of file
+      while(bytes_read != 0)
+      {
+        // Read the file contents
+        bytes_read = read(file_desc, buffer, size);
+        
+        // Check if there were any errors reading the file
+        if(bytes_read < 0)
+        {
+          printf("Error reading file\n");
+        }
+      
+        // Print the read contents
+        for(int i = 0; i < bytes_read; i++) {
+          printf("%c", buffer[i]);
+        }
+      }
+      
+      // Close the file
+      exit(0);
 		}
 		close(new_fd);  // parent doesn't need this
 	}

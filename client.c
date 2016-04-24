@@ -77,8 +77,7 @@ int main(int argc, char *argv[])
 	printf("client: connecting to %s\n", s);
 
 	freeaddrinfo(servinfo); // all done with this structure
-
-  if (send(sockfd, argv[3], sizeof argv[3], 0) == -1) {
+  if (send(sockfd, argv[3], strlen(argv[3]), 0) == -1) {
       perror("send");
   }
 	close(sockfd);

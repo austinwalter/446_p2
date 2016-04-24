@@ -1,16 +1,18 @@
+CFLAGS = -Wall -g -std=gnu99
+
 all: server client
 
 server: server.o
-	gcc server.o -o server
+	gcc $(CFLAGS) -o server server.o
 
 client: client.o
-	gcc client.o -o client
+	gcc $(CFLAGS) -o client client.o
 
-t_server.o: server.c
-	gcc -c -Wall -g server.c
+server.o: server.c
+	gcc $(CFLAGS) -c server.c
 
-t_client.o: client.c
-	gcc -c -Wall -g client.c
+client.o: client.c
+	gcc $(CFLAGS) -c client.c
 
 clean:
 	rm *o server client
