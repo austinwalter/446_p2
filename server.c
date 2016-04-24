@@ -15,8 +15,6 @@
 #include <sys/wait.h>
 #include <signal.h>
 
-#define PORT "3490"  // the port users will be connecting to
-
 #define BACKLOG 10	 // how many pending connections queue will hold
 
 void sigchld_handler(int s)
@@ -40,7 +38,7 @@ void *get_in_addr(struct sockaddr *sa)
 	return &(((struct sockaddr_in6*)sa)->sin6_addr);
 }
 
-int main(void)
+int main(int argc, char *argv[])
 {
 	int sockfd, new_fd;  // listen on sock_fd, new connection on new_fd
 	struct addrinfo hints, *servinfo, *p;
@@ -49,14 +47,20 @@ int main(void)
 	struct sigaction sa;
 	int yes=1;
 	char s[INET6_ADDRSTRLEN];
-	int rv;
+	int rv, numbytes;
+  char buf[100];
+
+  if (argc != 2) {
+    fprintf(stderr,"usage: please enter a port number\n");
+    exit(1);
+  }
 
 	memset(&hints, 0, sizeof hints);
 	hints.ai_family = AF_UNSPEC;
 	hints.ai_socktype = SOCK_STREAM;
 	hints.ai_flags = AI_PASSIVE; // use my IP
 
-	if ((rv = getaddrinfo(NULL, PORT, &hints, &servinfo)) != 0) {
+	if ((rv = getaddrinfo(NULL, argv[1], &hints, &servinfo)) != 0) {
 		fprintf(stderr, "getaddrinfo: %s\n", gai_strerror(rv));
 		return 1;
 	}
@@ -121,9 +125,13 @@ int main(void)
 
 		if (!fork()) { // this is the child process
 			close(sockfd); // child doesn't need the listener
-			if (send(new_fd, "Hello, world!", 13, 0) == -1)
-				perror("send");
-			close(new_fd);
+      if ((numbytes = recv(new_fd, buf, 99, 0)) == -1) {
+        perror("recv");
+        exit(1);
+      }
+      close(new_fd);
+      buf[numbytes+1] = '\0';
+      printf("received: '%s'\n",buf);
 			exit(0);
 		}
 		close(new_fd);  // parent doesn't need this
