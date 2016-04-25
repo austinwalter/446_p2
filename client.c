@@ -85,18 +85,14 @@ int main(int argc, char *argv[])
   if (send(sockfd, argv[3], strlen(argv[3]), 0) == -1) {
       perror("send");
   }
-  int file_desc = open(argv[3], O_WRONLY|O_CREAT);
+  int file_desc = open(argv[3], O_CREAT|O_RDWR,0666);
   printf("waiting to receive...\n");
-  while((numbytes = readchunk(sockfd,buf,MAXDATASIZE)) > 0)
-  { 
+  while((numbytes = readchunk(sockfd,buf,255)) > 0)
+  {
     buf[numbytes] = '\0';
-    write(file_desc, buf, 256);
-    printf("%s\n", buf);
-    //printf("%i\n",numbytes);
+    write(file_desc, buf, numbytes);
   }
   close(file_desc);
-  printf("done\n");
-
   close(sockfd);
 
 	return 0;

@@ -177,11 +177,11 @@ int main(int argc, char *argv[])
           printf("Error reading file\n");
         }
         
-        el = bytes_read / sizeof(buffer[0]);
+        el = bytes_read / sizeof buffer[0];
       }
 
         buffer[el] = '\0';
-        printf("%s",buffer);
+        //printf("%s",buffer);
         printf("%i\n", bytes_read/4);
         while(bytes_sent != sizef)
         {
@@ -190,6 +190,7 @@ int main(int argc, char *argv[])
             perror("send");
             exit(1);
           }
+          printf("%i",bytes_sent);
         }
       //}
       close(new_fd);
