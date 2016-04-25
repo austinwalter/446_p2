@@ -1,5 +1,9 @@
 /*
-** client.c -- a stream socket client demo
+ * Austin Walter
+ * Brennen Miller
+ * CSCI 446 S16
+ * Program 2
+ * client.c
 */
 
 #include <stdio.h>
@@ -42,7 +46,7 @@ int main(int argc, char *argv[])
 //  int n = 1;
 
 	if (argc != 4) {
-	    fprintf(stderr,"usage: incorrect number of inputs\n");
+	    fprintf(stderr,"client: incorrect number of inputs\n");
 	    exit(1);
 	}
 
@@ -85,9 +89,16 @@ int main(int argc, char *argv[])
   if (send(sockfd, argv[3], strlen(argv[3]), 0) == -1) {
       perror("send");
   }
+  int nm = recv(sockfd, buf, 26, 0);
+  buf[nm] = '\0';
+  if(strcmp(buf,"server: all good          ") != 0)
+  {
+    printf("%s\n",buf);
+    exit(1);
+  }
+
   int file_desc = open(argv[3], O_CREAT|O_RDWR,0666);
-  printf("waiting to receive...\n");
-  while((numbytes = readchunk(sockfd,buf,255)) > 0)
+  while((numbytes = readchunk(sockfd,buf,MAXDATASIZE-1)) > 0)
   {
     buf[numbytes] = '\0';
     write(file_desc, buf, numbytes);

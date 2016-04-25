@@ -1,6 +1,11 @@
 /*
-** server.c -- a stream socket server demo
+ * Austin Walter
+ * Brennen Miller
+ * CSCI 446 S16
+ * Program 2
+ * server.c
 */
+
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -51,12 +56,10 @@ int main(int argc, char *argv[])
 	int yes=1;
 	char s[INET6_ADDRSTRLEN];
 	int rv, numbytes;
-  int size = 256;
   int bytes_read = 0;
   int bytes_sent;
-  char buf[100];//, buffer[size];
-  char **file_arr;
-  int file_size = 0;
+  char buf[100];
+  int size = 256;
 
   if (argc != 2) {
     fprintf(stderr,"usage: please enter a port number\n");
@@ -116,8 +119,6 @@ int main(int argc, char *argv[])
 		exit(1);
 	}
 
-	printf("server: waiting for connections...\n");
-
 	while(1) {  // main accept() loop
     sin_size = sizeof their_addr;
 		new_fd = accept(sockfd, (struct sockaddr *)&their_addr, &sin_size);
@@ -129,39 +130,31 @@ int main(int argc, char *argv[])
 		inet_ntop(their_addr.ss_family,
 			get_in_addr((struct sockaddr *)&their_addr),
 			s, sizeof s);
-		printf("server: got connection from %s\n", s);
 
     if (!fork())
     { // this is the child process
       close(sockfd); // child doesn't need the listener
       if ((numbytes = recv(new_fd, buf, 99, 0)) == -1) {
-        perror("recv");
+        send(new_fd, "server: receiving error    ", 26, 0);
         exit(1);
       }
 
       buf[numbytes] = '\0';
-      printf("received: '%s'\n",buf);
-      int num = sizeof buf + 7;
-      char fpath[num];
-      strcpy(fpath, "./file/");
-      strcat(fpath, buf);
       // Open the file
-      int file_desc = open(fpath, O_RDONLY);
+      int file_desc = open(buf, O_RDONLY);
       
-      // Check to see if there were any error opening the file
+      // Check to see if there were any errors opening the file
       if(file_desc < 0)
       {
-        perror("Error opening file");
-        printf("%s",fpath);
+        send(new_fd, "server: error reading file", 26, 0);
         exit(1);
       }
 
       struct stat st;
       // stat() returns -1 on error. Skipping check in this example
-      stat(fpath, &st);
+      stat(buf, &st);
       int sizef = (int) st.st_size;
       char buffer[sizef];
-      printf("%i,%i\n",sizef,sizef/4);
       int el = 0;
       char *ptr;
       // loop until end of file
@@ -174,29 +167,27 @@ int main(int argc, char *argv[])
         // Check if there were any errors reading the file
         if(bytes_read < 0)
         {
-          printf("Error reading file\n");
+          send(new_fd, "server: error reading file", 26, 0);
         }
         
         el = bytes_read / sizeof buffer[0];
       }
 
         buffer[el] = '\0';
-        //printf("%s",buffer);
-        printf("%i\n", bytes_read/4);
+        send(new_fd, "server: all good          ", 26, 0);
         while(bytes_sent != sizef)
         {
           if((bytes_sent = send(new_fd, buffer, sizef, 0)) == -1)
           {
-            perror("send");
+            send(new_fd, "server: error sending     ", 26, 0);
             exit(1);
           }
-          printf("%i",bytes_sent);
         }
-      //}
       close(new_fd);
       exit(0);
     }  
     close(new_fd);  // parent doesn't need this
+    exit(0);
   }
 
 	return 0;
