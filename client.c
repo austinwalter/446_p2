@@ -11,6 +11,8 @@
 #include <sys/types.h>
 #include <netinet/in.h>
 #include <sys/socket.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 
 #include <arpa/inet.h>
 
@@ -28,6 +30,8 @@ void *get_in_addr(struct sockaddr *sa)
 	return &(((struct sockaddr_in6*)sa)->sin6_addr);
 }
 
+ssize_t readchunk( int sockfd, void *buf, size_t len );
+
 int main(int argc, char *argv[])
 {
 	int sockfd, numbytes;  
@@ -35,6 +39,7 @@ int main(int argc, char *argv[])
 	struct addrinfo hints, *servinfo, *p;
 	int rv;
 	char s[INET6_ADDRSTRLEN];
+//  int n = 1;
 
 	if (argc != 4) {
 	    fprintf(stderr,"usage: incorrect number of inputs\n");
@@ -80,8 +85,24 @@ int main(int argc, char *argv[])
   if (send(sockfd, argv[3], strlen(argv[3]), 0) == -1) {
       perror("send");
   }
-	close(sockfd);
+  int file_desc = open(argv[3], O_RDWR|O_CREAT|S_IRWXO);
+  printf("waiting to receive...\n");
+  while((numbytes = readchunk(sockfd,buf,265)) > 0)
+  {
+    //buf[numbytes] = '\0';
+    //write(file_desc, buf, 256);
+    printf("%s\n", buf);
+    //printf("%i\n",numbytes);
+  }
+  close(file_desc);
+  printf("done\n");
+
+  close(sockfd);
 
 	return 0;
+}
+
+ssize_t readchunk( int sockfd, void *buf, size_t len ) {       
+  return recv(sockfd, buf, len, MSG_WAITALL);  
 }
 

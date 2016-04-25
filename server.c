@@ -51,9 +51,12 @@ int main(int argc, char *argv[])
 	int yes=1;
 	char s[INET6_ADDRSTRLEN];
 	int rv, numbytes;
-  int size = 1024;
-  int bytes_read = 1;
-  char buf[100], buffer[size];
+  int size = 256;
+  int bytes_read = 0;
+  int bytes_sent;
+  char buf[100];//, buffer[size];
+  char **file_arr;
+  int file_size = 0;
 
   if (argc != 2) {
     fprintf(stderr,"usage: please enter a port number\n");
@@ -116,7 +119,7 @@ int main(int argc, char *argv[])
 	printf("server: waiting for connections...\n");
 
 	while(1) {  // main accept() loop
-		sin_size = sizeof their_addr;
+    sin_size = sizeof their_addr;
 		new_fd = accept(sockfd, (struct sockaddr *)&their_addr, &sin_size);
 		if (new_fd == -1) {
 			perror("accept");
@@ -128,13 +131,14 @@ int main(int argc, char *argv[])
 			s, sizeof s);
 		printf("server: got connection from %s\n", s);
 
-		if (!fork()) { // this is the child process
-			close(sockfd); // child doesn't need the listener
-      if ((numbytes = recv(new_fd, buf, 99, MSG_WAITALL)) == -1) {
+    if (!fork())
+    { // this is the child process
+      close(sockfd); // child doesn't need the listener
+      if ((numbytes = recv(new_fd, buf, 99, 0)) == -1) {
         perror("recv");
         exit(1);
       }
-      close(new_fd);
+
       buf[numbytes] = '\0';
       printf("received: '%s'\n",buf);
       int num = sizeof buf + 7;
@@ -151,30 +155,48 @@ int main(int argc, char *argv[])
         printf("%s",fpath);
         exit(1);
       }
-      
+
+      struct stat st;
+      // stat() returns -1 on error. Skipping check in this example
+      stat(fpath, &st);
+      int sizef = (int) st.st_size;
+      char buffer[sizef];
+      printf("%i,%i\n",sizef,sizef/4);
+      int el = 0;
+      char *ptr;
       // loop until end of file
-      while(bytes_read != 0)
+      while(bytes_read < sizef)
       {
+        ptr = &buffer[el];
         // Read the file contents
-        bytes_read = read(file_desc, buffer, size);
+        bytes_read += read(file_desc, ptr, size);
         
         // Check if there were any errors reading the file
         if(bytes_read < 0)
         {
           printf("Error reading file\n");
         }
-      
-        // Print the read contents
-        for(int i = 0; i < bytes_read; i++) {
-          printf("%c", buffer[i]);
-        }
+        
+        el = bytes_read / sizeof(buffer[0]);
       }
-      
-      // Close the file
+
+        buffer[el] = '\0';
+        printf("%s",buffer);
+        printf("%i\n", bytes_read/4);
+        while(bytes_sent != sizef)
+        {
+          if((bytes_sent = send(new_fd, buffer, sizef, 0)) == -1)
+          {
+            perror("send");
+            exit(1);
+          }
+        }
+      //}
+      close(new_fd);
       exit(0);
-		}
-		close(new_fd);  // parent doesn't need this
-	}
+    }  
+    close(new_fd);  // parent doesn't need this
+  }
 
 	return 0;
 }
